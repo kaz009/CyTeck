@@ -84,6 +84,29 @@
                     Laravel
                 </div>
 
+
+
+
+
+                <form method="GET" action="{{ route('list') }}">
+                    <input type="search" placeholder="商品名を入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
+                    <div>
+                        <button type="submit">検索</button>
+                        <button>
+                            <a href="{{ route('list') }}" class="text-white">
+                                クリア
+                            </a>
+                        </button>
+                    </div>
+                </form>
+
+
+
+
+
+
+
+
                 <div class="links">
                     <table>
                         <thead>
