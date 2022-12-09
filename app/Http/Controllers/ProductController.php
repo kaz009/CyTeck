@@ -44,7 +44,9 @@ class ProductController extends Controller
         }
         
 
-        $products = $query->paginate(20);
+        $products = $query->get();
+
+       
 
         return view('list')
             ->with([

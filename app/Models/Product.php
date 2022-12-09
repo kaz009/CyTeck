@@ -23,6 +23,7 @@ class Product extends Model
             , "products.updated_at as products_updated_at"
             )
             ->join('companies', 'company_id', '=', 'companies.id');
+            
 
            
 

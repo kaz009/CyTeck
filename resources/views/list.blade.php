@@ -138,6 +138,13 @@
                                 <th>updated_at</th>
                             </tr>
                         </thead>
+                        @foreach ($products as $product)
+                        @if( $product->company_name === "")
+                        <p>$test</p>
+                        @else
+                        <p>Hello</p>
+                        @endif
+                        @endforeach
                         <tbody>
                         @foreach ($products as $product)
                             <tr>
@@ -148,8 +155,8 @@
                                 <td>{{ $product->stock }}</td>
                                 <td>{{ $product->comment }}</td>
                                 <td>{{ $product->img_path }}</td>
-                                <td>{{ $product->products_created_at }}</td>
-                                <td>{{ $product->products_updated_at }}</td>
+                                <td>{{ $product->created_at }}</td>
+                                <td>{{ $product->company_name }}</td>
                                 <td>
                                     <form action="{{ route('productDestroy', ['id'=>$product->products_id]) }}" method="POST">
                                         @csrf
