@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Company;
 
 class ProductController extends Controller
 {
@@ -11,15 +12,22 @@ class ProductController extends Controller
 
     public function showList(Request $request) {
 
-        $products = Product::paginate(20);
+                
+        $model = new Company();
+        $companies = $model->getList();
+        
+        $model = new Product();
+        $query = $model  ->getList();
+        $products = $model ->getList() ;
 
-        $search = $request->input('search');
+        $search1 = $request->input('search1');
+        $search2 = $request->input('search2');
 
-        $query = Product::query();
+        
+        //キーワード検索
+        if ($search1) {
 
-        if ($search) {
-
-            $spaceConversion = mb_convert_kana($search, 's');
+            $spaceConversion = mb_convert_kana($search1, 's');
 
             $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -27,14 +35,31 @@ class ProductController extends Controller
                 $query->where('product_name', 'like', '%'.$value.'%');
             }
 
-            $products = $query->paginate(20);
 
         }
+
+        //社名検索
+        if ($search2) {
+            $query->where('company_name', 'like', $search2);
+        }
+        
+
+        $products = $query->paginate(20);
 
         return view('list')
             ->with([
                 'products' => $products,
-                'search' => $search,
+                'companies' => $companies,
             ]);
     }
+
+    public function destroy($id)
+    {
+        $model = new Product() ;
+        $model ->destroy($id);
+      
+        return redirect()->route('list');
+    }
 }
+
+

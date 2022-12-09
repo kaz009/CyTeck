@@ -21,3 +21,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/list', 'ProductController@showList')->name('list') ->middleware('auth');
+
+Route::post('/destroy{id}', 'ProductController@destroy')->name('productDestroy');

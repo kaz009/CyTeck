@@ -87,19 +87,35 @@
 
 
 
+                <div>
+                    <form method="GET" action="{{ route('list') }}">
+                        <input type="search" placeholder="商品名を入力" name="search1" value="@if (isset($search1)) {{ $search1 }} @endif">
+                        <div>
+                            <button type="submit">検索</button>
+                            <button>
+                                <a href="{{ route('list') }}" class="text-white">
+                                    クリア
+                                </a>
+                            </button>
+                        </div>
 
-                <form method="GET" action="{{ route('list') }}">
-                    <input type="search" placeholder="商品名を入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
-                    <div>
-                        <button type="submit">検索</button>
-                        <button>
-                            <a href="{{ route('list') }}" class="text-white">
-                                クリア
-                            </a>
-                        </button>
-                    </div>
-                </form>
+                        <div>
+                            <label for="">会社名絞り込み
+                                <div>
+                                    
+                                    <select name="search2" data-toggle="select" value="@if (isset($search2)) {{ $search2 }} @endif">
+                                        <option value="">全て</option>
+                                        @foreach ($companies as $company)
+                                            <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </label>
+                        </div>
 
+                       
+                    </form>
+                </div>
 
 
 
@@ -125,15 +141,21 @@
                         <tbody>
                         @foreach ($products as $product)
                             <tr>
-                                <td>{{ $product->id }}</td>
+                                <td>{{ $product->products_id }}</td>
                                 <td>{{ $product->company_id }}</td>
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>{{ $product->comment }}</td>
                                 <td>{{ $product->img_path }}</td>
-                                <td>{{ $product->created_at }}</td>
-                                <td>{{ $product->updated_at }}</td>
+                                <td>{{ $product->products_created_at }}</td>
+                                <td>{{ $product->products_updated_at }}</td>
+                                <td>
+                                    <form action="{{ route('productDestroy', ['id'=>$product->products_id]) }}" method="POST">
+                                        @csrf
+                                        <button type="submit">削除</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
