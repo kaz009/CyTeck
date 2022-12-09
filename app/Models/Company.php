@@ -13,5 +13,20 @@ class Company extends Model
         return $companies;
     }
 
+    public function getId($company_name) {
+        $companies = Company::get();
+        $companies->where('company_name', 'like', $company_name);
+        $company_id = $companies ->value('id');
+        return $company_id;
+    }
+
+    public function getName($company_id) {
+        $companies = Company::get();
+        $companies->where('id', 'like', $company_id);
+        $company_name = $companies ->value('company_name');
+
+        return $company_name;
+    }
+ 
 
 }

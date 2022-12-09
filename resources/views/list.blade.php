@@ -138,15 +138,6 @@
                                 <th>updated_at</th>
                             </tr>
                         </thead>
-                        @foreach ($products as $product)
-                        @if( $product->company_name === "")
-                        <p>$test</p>
-                        @else
-                        <p>Hello</p>
-                        @endif
-                        @endforeach
-                        <tbody>
-                        @foreach ($products as $product)
                             <tr>
                                 <td>{{ $product->products_id }}</td>
                                 <td>{{ $product->company_id }}</td>
