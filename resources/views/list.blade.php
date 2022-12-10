@@ -138,6 +138,7 @@
                                 <th>updated_at</th>
                             </tr>
                         </thead>
+                            @foreach($products as $product)
                             <tr>
                                 <td>{{ $product->products_id }}</td>
                                 <td>{{ $product->company_id }}</td>
@@ -155,7 +156,7 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

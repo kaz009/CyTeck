@@ -21,6 +21,7 @@ class Product extends Model
             , "img_path"
             , "products.created_at as products_created_at"
             , "products.updated_at as products_updated_at"
+            ,"company_name"
             )
             ->join('companies', 'company_id', '=', 'companies.id');
             
