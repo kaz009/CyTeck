@@ -64,31 +64,34 @@
         </style>
     </head>
     <body>
+        <form action="{{ route('registerButton') }}" method="POST">
+            <div>
+                <input type="text" placeholder="商品名を入力" name="product_name" value = "@if (isset($product_name)) {{ $product_name }} @endif">
+            </div>
+            <div>
+                <input type="text" placeholder="メーカー名を入力" name="company_name" value = "@if (isset($company_name)) {{ $company_name }} @endif">
+            </div>
+            <div>
+                <input type="text" placeholder="価格を入力" name="price" value = "@if (isset($price)) {{ $price }} @endif">
+            </div>
+            <div>
+                <input type="text" placeholder="在庫を入力" name="stock" value = "@if (isset($stock)) {{ $stock }} @endif">
+            </div>
+            <div>
+                <input type="text" placeholder="コメントを入力" name="comment" value = "@if (isset($comment)) {{ $comment }} @endif">
+            </div>
+            <div>
+                <input type="file" name="img_path" value = "@if (isset($img_path)) {{ $img_path }} @endif">
+            </div>
+            <div>
+                @csrf
+                <button type="submit">登録</button>
+            </div>
+        </form>
         <div>
-            <input type="text" placeholder="商品名を入力" name="product_name" >
+            <a class="rounded-md bg-gray-800 text-white px-4 py-2" href="{{ route('list') }}">戻る</a>
         </div>
-        <div>
-            @foreach ($companies as $company)
-                <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
-            @endforeach
-        </div>
-        <div>
-            <input type="text" placeholder="価格を入力" name="price" >
-        </div>
-        <div>
-            <input type="text" placeholder="在庫を入力" name="stock" >
-        </div>
-        <div>
-            <input type="text" placeholder="コメントを入力" name="comment" >
-        </div>
-        <div>
-            <input type="file" name="img_path" >
-        </div>
-        <div>
-            <button type="submit">登録</button>
-        </div>
-        <div>
-            <button type="submit">戻る</button>
-        </div>
+
+        
     </body>
 </html>

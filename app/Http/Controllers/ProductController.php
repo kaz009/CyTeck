@@ -17,8 +17,7 @@ class ProductController extends Controller
         $companies = $model->getList();
         
         $model = new Product();
-        $query = $model  ->getList();
-        $products = $model ->getList() ;
+        $query = $model  ->getJoinedList();
 
         $search1 = $request->input('search1');
         $search2 = $request->input('search2');
@@ -55,13 +54,14 @@ class ProductController extends Controller
             ]);
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $model = new Product() ;
         $model ->destroy($id);
       
         return redirect()->route('list');
     }
+
+    
 }
 
 

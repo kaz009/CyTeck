@@ -8,19 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
+    protected $fillable = ["company_id", 'company_name', "product_name", "price", "stock", "comment", "img_path", "created_at", "updated_at"];
 
 
-    public function getList() {
+    public function getJoinedList() {
         $products = Product::select(
             "products.id as products_id"
             , "company_id"
             ,"product_name"
             ,"price"
             , "stock"
-            , "comment"
             , "img_path"
-            , "products.created_at as products_created_at"
-            , "products.updated_at as products_updated_at"
             ,"company_name"
             )
             ->join('companies', 'company_id', '=', 'companies.id');
@@ -37,4 +35,17 @@ class Product extends Model
         $product -> delete();
         return ;
     }
+
+    public function register($data){
+        
+        Product::create([
+            'product_name' => $data['product_name'],
+            "price" => $data['price'],
+            "stock" => $data['stock'],
+            "comment" => $data['comment'],
+            "img_path" => $data['img_path']
+        ]);
+        return;
+    }
 }
+

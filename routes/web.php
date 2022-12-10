@@ -20,6 +20,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//商品一覧
 Route::get('/list', 'ProductController@showList')->name('list') ->middleware('auth');
-
 Route::post('/destroy{id}', 'ProductController@destroy')->name('productDestroy');
+
+//新規登録
+Route::get('/register', 'RegisterController@index')->name('register');
+Route::post('/registerButton', 'RegisterController@productRegister')->name('registerButton') ->middleware('auth');
