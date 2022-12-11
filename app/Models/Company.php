@@ -16,24 +16,24 @@ class Company extends Model
     }
 
     public function getId($company_name) {
-        $companies = Company::get();
-        $companies->where('company_name', 'like', $company_name);
-        $company_id = $companies ->value('id');
+        $company_id = Company :: where('company_name', '=', $company_name)
+            ->value('id');
+        
         return $company_id;
     }
 
     public function getName($company_id) {
-        $companies = Company :: get();
-        $companies->where('id', 'like', $company_id);
-        $company_name = $companies ->value('company_name');
+        $company_name = Company :: where('id', '=', $company_id)
+            ->value('company_name');
 
         return $company_name;
     }
  
     public function register($company_name){
-        
-        
-        $result = Company :: firstOrCreate(['company_name' => $company_name]);
-        return $result;
+        $check = Company::where("company_name", "=" , $company_name)->exists();
+        if(!$check){
+            Company::create(['company_name' => $company_name]);
+        }
+        return;
     }
 }

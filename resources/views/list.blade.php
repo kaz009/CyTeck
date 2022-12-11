@@ -133,7 +133,13 @@
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>{{ $product->company_name }}</td>
-                                <td><button type="submit">詳細</button></td>
+                                <form action="{{ route('productDetail', ['id'=>$product->products_id]) }}" method="POST">
+                                    <td>
+                                        <button type="submit">
+                                            <a class="rounded-md bg-gray-800 text-white px-4 py-2" href="{{ route('detail') }}">詳細</a>
+                                        </button>
+                                    </td>
+                                </form>
                                 <td>
                                     <form action="{{ route('productDestroy', ['id'=>$product->products_id]) }}" method="POST">
                                         @csrf
@@ -145,7 +151,9 @@
                         </thead>
                     </table>
                     <div>
-                        <a class="rounded-md bg-gray-800 text-white px-4 py-2" href="{{ route('register') }}">新規登録</a>
+                        <button type="submit">
+                            <a class="rounded-md bg-gray-800 text-white px-4 py-2" href="{{ route('register') }}">新規登録</a>
+                        </button>
                     </div>
                 </div>
             </div>

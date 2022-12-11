@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\CompanyController;
 use App\Models\Product;
 use App\Models\Company;
 
@@ -60,6 +61,22 @@ class ProductController extends Controller
       
         return redirect()->route('list');
     }
+
+
+    public static function productRegister($inputs){
+        $company_id = CompanyController :: getCompanyId($inputs["company_name"]);
+
+        $model = new Product();
+        $model -> register($inputs, $company_id);
+        return;
+    } 
+
+    //public function detail($id){
+    //    $model = new Product();
+    //    $model -> findProduct($id);
+    //
+    //    return redirect()->route('detail');
+    //}
 
     
 }
