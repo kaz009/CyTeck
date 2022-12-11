@@ -21,8 +21,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //商品一覧
-Route::get('/list', 'ProductController@showList')->name('list') ->middleware('auth');
-Route::post('/destroy{id}', 'ProductController@destroy')->name('productDestroy');
+Route::get('/list', 'ListController@showList')->name('list') ->middleware('auth');
+Route::post('/destroy{id}', 'ListController@destroy')->name('productDestroy');
 
 //ここがdetailのためのID取得
 Route::post('/detail{id}', 'DetailController@index') -> name('productDetail');

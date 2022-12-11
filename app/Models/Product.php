@@ -36,15 +36,14 @@ class Product extends Model
         return ;
     }
 
-    public function register($inputs, $company_id){
-        
+    public function register($items, $company_id) {
         Product::create([
             "company_id" => $company_id,
-            'product_name' => $inputs['product_name'],
-            "price" => $inputs['price'],
-            "stock" => $inputs['stock'],
-            "comment" => $inputs['comment'],
-            "img_path" => $inputs['img_path']
+            'product_name' => $items['product_name'],
+            "price" => $items['price'],
+            "stock" => $items['stock'],
+            "comment" => $items['comment'],
+            "img_path" => $items['img_path']
         ]);
         return;
     }

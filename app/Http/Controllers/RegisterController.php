@@ -15,8 +15,14 @@ class RegisterController extends Controller
 
     public function productRegister(Request $request) {
         $inputs = $request -> all();
-        CompanyController :: companyRegister($inputs["company_name"]);
-        ProductController :: productRegister($inputs);
+
+        $controller = new CompanyController;
+        $controller -> companyRegister($inputs["company_name"]);
+        $company_id = $controller -> getCompanyId($inputs["company_name"]);
+
+        $controller = new ProductController;
+        $controller -> productRegister($inputs, $company_id);
+        
         return redirect()->route('list');
     }
 }

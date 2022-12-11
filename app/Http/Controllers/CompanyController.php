@@ -7,13 +7,20 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
-    public static function companyRegister($company_name){
+    public function getCompanyList() {
+        $model = new Company();
+        $companies = $model->getList();
+        return $companies;
+    }
+
+
+    public function companyRegister($company_name) {
         $model = new Company();
         $company = $model -> register($company_name);
         return;
     } 
 
-    public static function getCompanyId($company_name){
+    public function getCompanyId($company_name) {
         $model = new Company();
         $company_id = $model -> getId($company_name);
         return $company_id;
