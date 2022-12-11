@@ -25,4 +25,10 @@ class CompanyController extends Controller
         $company_id = $model -> getId($company_name);
         return $company_id;
     }
+
+    public function getCompanyName($company_id) {
+        $model = new Company();
+        $company_name = $model -> getName($company_id);
+        return $company_name;
+    }
 }

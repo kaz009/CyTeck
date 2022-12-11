@@ -15,6 +15,12 @@ class ProductController extends Controller
         return $products;
     }
 
+    public function getProduct($id) {
+        $model = new Product();
+        $product = $model -> getProduct($id);
+        return $product;
+    }
+
     public function destroy($id){
         $model = new Product();
         $model ->destroy($id);

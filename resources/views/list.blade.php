@@ -133,13 +133,12 @@
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>{{ $product->company_name }}</td>
-                                <form action="{{ route('productDetail', ['id'=>$product->products_id]) }}" method="POST">
-                                    <td>
-                                        <button type="submit">
-                                            <a class="rounded-md bg-gray-800 text-white px-4 py-2" href="{{ route('detail') }}">詳細</a>
-                                        </button>
-                                    </td>
-                                </form>
+                                <td>
+                                    <form action="{{ route('productDetail', ['id'=>$product->products_id]) }}" method="POST">
+                                        @csrf
+                                        <button type="submit">詳細</button>
+                                    </form>
+                                </td>
                                 <td>
                                     <form action="{{ route('productDestroy', ['id'=>$product->products_id]) }}" method="POST">
                                         @csrf

@@ -47,5 +47,9 @@ class Product extends Model
         ]);
         return;
     }
+
+    public function getProduct($id) {
+        return Product :: find($id);
+    }
 }
 
