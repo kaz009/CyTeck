@@ -22,4 +22,15 @@
 <div>
     <a>コメント:<?php echo $product["comment"];?> </a>
 </div>
+<div>
+    <form action="{{ route('editButton', ['id'=>$product->id]) }}" method="POST">
+        @csrf
+        <button type="submit">
+            編集
+        </button>
+    </form>
+</div>
+<div>
+    <a class="rounded-md bg-gray-800 text-white px-4 py-2" href="{{ route('list') }}">戻る</a>
+</div>
 @endsection

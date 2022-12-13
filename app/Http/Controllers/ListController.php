@@ -52,6 +52,8 @@ class listController extends Controller
     }
 
     public function destroy($id) {
+        if(!window.confirm('本当に削除しますか？'))
+            return;
         $controller = new ProductController;
         $controller -> destroy($id);
         return redirect()->route('list');

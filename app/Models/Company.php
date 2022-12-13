@@ -29,11 +29,11 @@ class Company extends Model
         return $company_name;
     }
  
-    public function register($company_name){
+    public function register($company_name) {
         $check = Company::where("company_name", "=" , $company_name)->exists();
         if(!$check){
             Company::create(['company_name' => $company_name]);
         }
-        return;
+        return ;
     }
 }

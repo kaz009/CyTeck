@@ -23,9 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //商品一覧
 Route::get('/list', 'ListController@showList')->name('list') ->middleware('auth');
 Route::post('/destroy{id}', 'ListController@destroy')->name('productDestroy');
-
-//ここがdetailのためのID取得
-Route::post('/detail{id}', 'DetailController@index') -> name('productDetail');
+Route::post('/detail{id}', 'DetailController@targetProduct') -> name('productDetail');
 
 //新規登録
 Route::get('/register', 'RegisterController@index')->name('register');
@@ -33,3 +31,8 @@ Route::post('/registerButton', 'RegisterController@productRegister')->name('regi
 
 //商品詳細画面
 Route::get('/detail', 'DetailController@index')->name('detail');
+Route::POST('/editButton{id}', 'EditController@targetProduct')->name('editButton') ->middleware('auth');
+
+//商品編集ページ
+Route::get('/edit', 'EditController@index')->name('edit');
+Route::post('/productEdit{id}', 'EditController@productEdit')->name('productEdit');
