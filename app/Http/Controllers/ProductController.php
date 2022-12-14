@@ -21,7 +21,7 @@ class ProductController extends Controller
         return $product;
     }
 
-    public function destroy($id){
+    public function destroy($id) {
         $model = new Product();
         $model ->destroy($id);
         return;
@@ -47,5 +47,3 @@ class ProductController extends Controller
         return;
     }
 }
-
-

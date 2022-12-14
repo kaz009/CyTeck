@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    protected $fillable = ["company_id", 'company_name', "product_name", "price", "stock", "comment", "img_path", "created_at", "updated_at"];
+    protected $fillable = ["company_id", "company_name", "product_name", "price", "stock", "comment", "img_path", "created_at", "updated_at"];
 
 
     public function getJoinedList() {
@@ -22,15 +22,11 @@ class Product extends Model
             ,"company_name"
             )
             ->join('companies', 'company_id', '=', 'companies.id');
-            
-
-           
 
         return $products;
     }
 
-    public static function destroy($id)
-    {
+    public static function destroy($id) {
         $product = Product::find($id);
         $product -> delete();
         return ;
@@ -52,4 +48,3 @@ class Product extends Model
         return Product :: find($id);
     }
 }
-

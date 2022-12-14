@@ -8,8 +8,12 @@ use App\Models\Product;
 
 class RegisterController extends Controller
 {
+
     public function index() {
-        return view('register');
+        $controller = new CompanyController;
+        $company_list = $controller -> getCompanyList();
+
+        return view("register") -> with(["company_list" => $company_list]);
     }
 
 
@@ -22,7 +26,7 @@ class RegisterController extends Controller
 
         $controller = new ProductController;
         $controller -> productRegister($inputs, $company_id);
-        
-        return redirect()->route('list');
+
+        return redirect()->route("list");
     }
 }

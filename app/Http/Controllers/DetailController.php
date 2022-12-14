@@ -8,8 +8,7 @@ use App\Http\Controllers\CompanyController;
 
 class DetailController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         return view('detail');
     }
 
@@ -18,7 +17,8 @@ class DetailController extends Controller
         $product = $controller -> getProduct($id);
 
         $controller = new CompanyController;
-        $company_name = $controller -> getCompanyName($product["company_id"]);
+        $company_name = $controller -> getCompanyName($product['company_id']);
+
         return view('detail') -> with([
             'product' => $product,
             'company_name' => $company_name

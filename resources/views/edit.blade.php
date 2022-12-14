@@ -10,6 +10,7 @@ $price = session() -> get("price");
 $stock = session() -> get("stock");
 $comment = session() -> get("comment");
 $img_path = session() -> get("img_path");
+$company_list =session() -> get("company_list");
 ?>
 
 
@@ -21,9 +22,17 @@ $img_path = session() -> get("img_path");
     <div>
         <input type="text" placeholder="商品名を入力" name="product_name" value = "@if (isset($product_name)) {{ $product_name }} @endif" require>
     </div>
-    <div>
-        <input type="text" placeholder="メーカー名を入力" name="company_name" value = "@if (isset($company_name)) {{ $company_name }} @endif" require>
-    </div>
+
+
+    <select name="company_name" data-toggle="select" value="@if (isset($company_name)) {{ $company_name }} @endif">
+        <option value="">{{ $company_name }}</option>
+        @foreach ($company_list as $company)
+        <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
+        @endforeach
+    </select>
+
+
+
     <div>
         <input type="number" placeholder="価格を入力" name="price" value = "@if (isset($price)) {{ $price }} @endif" require>
     </div>

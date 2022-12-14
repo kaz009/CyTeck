@@ -16,19 +16,19 @@ class listController extends Controller
         $controller = new ProductController;
         $query = $controller -> getProductList();
 
-        $search1 = $request->input('search1');
-        $search2 = $request->input('search2');
+        $search1 = $request->input("search1");
+        $search2 = $request->input("search2");
 
-        
+
         //キーワード検索
         if ($search1) {
 
-            $spaceConversion = mb_convert_kana($search1, 's');
+            $spaceConversion = mb_convert_kana($search1, "s");
 
-            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+            $wordArraySearched = preg_split("/[\s,]+/", $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
 
             foreach($wordArraySearched as $value) {
-                $query->where('product_name', 'like', '%'.$value.'%');
+                $query->where("product_name", "like", "%".$value."%");
             }
 
 
@@ -36,29 +36,26 @@ class listController extends Controller
 
         //社名検索
         if ($search2) {
-            $query->where('company_name', 'like', $search2);
+            $query->where("company_name", "like", $search2);
         }
-        
+
 
         $products = $query->get();
 
-       
-
-        return view('list')
+        return view("list")
             ->with([
-                'products' => $products,
-                'companies' => $companies,
+                "products" => $products,
+                "companies" => $companies,
             ]);
     }
 
     public function destroy($id) {
         $controller = new ProductController;
         $controller -> destroy($id);
-        return redirect()->route('list');
+        return redirect()->route("list");
     }
 
-
-    public function productRegister($inputs){
+    public function productRegister($inputs) {
         $controller = new CompanyController;
         $company_id = $controller -> getCompanyId($inputs["company_name"]);
 
