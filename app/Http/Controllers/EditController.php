@@ -35,9 +35,7 @@ class EditController extends Controller
     }
 
     public function productEdit(Request $request, $id) {
-
         $inputs = $request -> all();
-
         $controller = new CompanyController;
         $controller -> companyRegister($inputs["company_name"]);
 

@@ -13,7 +13,7 @@ class RegisterController extends Controller
         $controller = new CompanyController;
         $company_list = $controller -> getCompanyList();
 
-        return view("register") -> with(["company_list" => $company_list]);
+        return view("productRegister") -> with(["company_list" => $company_list]);
     }
 
 

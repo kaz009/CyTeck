@@ -26,12 +26,12 @@ Route::post("/destroy{id}", "ListController@destroy")->name("productDestroy");
 Route::post("/detail{id}", "DetailController@targetProduct") -> name("productDetail");
 
 //新規登録
-Route::get("/register", "RegisterController@index")->name("register");
+Route::get("/productRegister", "RegisterController@index")->name("productRegister");
 Route::post("/registerButton", "RegisterController@productRegister")->name("registerButton") ->middleware("auth");
 
 //商品詳細画面
 Route::get("/detail", "DetailController@index")->name("detail");
-Route::POST("/editButton{id}", "'EditController@targetProduct")->name("editButton") ->middleware("auth");
+Route::POST("/editButton{id}", "EditController@targetProduct")->name("editButton") ->middleware("auth");
 
 //商品編集ページ
 Route::get("/edit", "EditController@index")->name("edit");

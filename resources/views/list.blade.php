@@ -67,7 +67,7 @@
     </table>
     <div>
         <button type="submit">
-            <a class="rounded-md bg-gray-800 text-white px-4 py-2" href="{{ route('register') }}">新規登録</a>
+            <a class="rounded-md bg-gray-800 text-white px-4 py-2" href="{{ route('productRegister') }}">新規登録</a>
         </button>
     </div>
 </div>
