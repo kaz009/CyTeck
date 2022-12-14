@@ -19,16 +19,16 @@ $img_path = session() -> get("img_path");
 
 <form action="{{ route('productEdit', ['id'=>$id]) }}" method="POST" >
     <div>
-        <input type="text" placeholder="商品名を入力" name="product_name" value = "@if (isset($product_name)) {{ $product_name }} @endif" >
+        <input type="text" placeholder="商品名を入力" name="product_name" value = "@if (isset($product_name)) {{ $product_name }} @endif" require>
     </div>
     <div>
-        <input type="text" placeholder="メーカー名を入力" name="company_name" value = "@if (isset($company_name)) {{ $company_name }} @endif" >
+        <input type="text" placeholder="メーカー名を入力" name="company_name" value = "@if (isset($company_name)) {{ $company_name }} @endif" require>
     </div>
     <div>
-        <input type="text" placeholder="価格を入力" name="price" value = "@if (isset($price)) {{ $price }} @endif" >
+        <input type="number" placeholder="価格を入力" name="price" value = "@if (isset($price)) {{ $price }} @endif" require>
     </div>
     <div>
-        <input type="text" placeholder="在庫を入力" name="stock" value = "@if (isset($stock)) {{ $stock }} @endif" >
+        <input type="number" placeholder="在庫を入力" name="stock" value = "@if (isset($stock)) {{ $stock }} @endif" require>
     </div>
     <div>
         <input type="text" placeholder="コメントを入力" name="comment" value = "@if (isset($comment)) {{ $comment }} @endif" >
