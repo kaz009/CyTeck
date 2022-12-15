@@ -13,11 +13,26 @@
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view("welcome");
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get("/home", "HomeController@index")->name("home");
 
-Route::get('/list', 'ProductController@showList')->name('list') ->middleware('auth');
+//商品一覧
+Route::get("/list", "ListController@showList")->name("list") ->middleware("auth");
+Route::post("/destroy{id}", "ListController@destroy")->name("productDestroy");
+Route::post("/detail{id}", "DetailController@targetProduct") -> name("productDetail");
+
+//新規登録
+Route::get("/productRegister", "RegisterController@index")->name("productRegister");
+Route::post("/registerButton", "RegisterController@productRegister")->name("registerButton") ->middleware("auth");
+
+//商品詳細画面
+Route::get("/detail", "DetailController@index")->name("detail");
+Route::POST("/editButton{id}", "EditController@targetProduct")->name("editButton") ->middleware("auth");
+
+//商品編集ページ
+Route::get("/edit", "EditController@index")->name("edit");
+Route::post("/productEdit{id}", "EditController@productEdit")->name("productEdit");
