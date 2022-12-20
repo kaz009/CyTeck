@@ -15,13 +15,13 @@ class EditController extends Controller
 
     public function targetProduct($id) {
         $controller = new ProductController;
-        $product = $controller -> getProduct($id);
+        $product = $controller->getProduct($id);
 
         $controller = new CompanyController;
-        $company_name = $controller -> getCompanyName($product["company_id"]);
-        $company_list = $controller -> getCompanyList();
+        $company_name = $controller->getCompanyName($product["company_id"]);
+        $company_list = $controller->getCompanyList();
 
-        return redirect() -> route("edit") -> with([
+        return redirect()->route("edit")->with([
             "product_id" => $product["id"],
             "product_name" => $product["product_name"],
             "price" => $product["price"],
@@ -35,15 +35,15 @@ class EditController extends Controller
     }
 
     public function productEdit(Request $request, $id) {
-        $inputs = $request -> all();
+        $inputs = $request->all();
         $controller = new CompanyController;
-        $controller -> companyRegister($inputs["company_name"]);
+        $controller->companyRegister($inputs["company_name"]);
 
-        $inputs["company_id"] = $controller -> getCompanyId($inputs["company_name"]);
+        $inputs["company_id"] = $controller->getCompanyId($inputs["company_name"]);
         
         $controller = new ProductController;
-        $controller -> productUpdate($id, $inputs);
+        $controller->productUpdate($id, $inputs);
 
-        return redirect()->route("list");
+        return redirect()-> route("list");
     }
 }

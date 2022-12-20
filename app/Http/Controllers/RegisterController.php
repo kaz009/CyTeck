@@ -11,21 +11,21 @@ class RegisterController extends Controller
 
     public function index() {
         $controller = new CompanyController;
-        $company_list = $controller -> getCompanyList();
+        $company_list = $controller->getCompanyList();
 
-        return view("productRegister") -> with(["company_list" => $company_list]);
+        return view("productRegister")->with(["company_list" => $company_list]);
     }
 
 
     public function productRegister(Request $request) {
-        $inputs = $request -> all();
+        $inputs = $request->all();
 
         $controller = new CompanyController;
-        $controller -> companyRegister($inputs["company_name"]);
-        $company_id = $controller -> getCompanyId($inputs["company_name"]);
+        $controller->companyRegister($inputs["company_name"]);
+        $company_id = $controller->getCompanyId($inputs["company_name"]);
 
         $controller = new ProductController;
-        $controller -> productRegister($inputs, $company_id);
+        $controller->productRegister($inputs, $company_id);
 
         return redirect()->route("list");
     }

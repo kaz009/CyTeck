@@ -16,19 +16,19 @@ class CompanyController extends Controller
 
     public function companyRegister($company_name) {
         $model = new Company();
-        $company = $model -> register($company_name);
+        $company = $model->register($company_name);
         return;
     } 
 
     public function getCompanyId($company_name) {
         $model = new Company();
-        $company_id = $model -> getId($company_name);
+        $company_id = $model->getId($company_name);
         return $company_id;
     }
 
     public function getCompanyName($company_id) {
         $model = new Company();
-        $company_name = $model -> getName($company_id);
+        $company_name = $model->getName($company_id);
         return $company_name;
     }
 }

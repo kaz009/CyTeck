@@ -11,10 +11,10 @@ class listController extends Controller
     public function showList(Request $request) {
 
         $controller = new CompanyController;
-        $companies = $controller -> getCompanyList();
+        $companies = $controller->getCompanyList();
 
         $controller = new ProductController;
-        $query = $controller -> getProductList();
+        $query = $controller->getProductList();
 
         $search1 = $request->input("search1");
         $search2 = $request->input("search2");
@@ -51,16 +51,16 @@ class listController extends Controller
 
     public function destroy($id) {
         $controller = new ProductController;
-        $controller -> destroy($id);
+        $controller->destroy($id);
         return redirect()->route("list");
     }
 
     public function productRegister($inputs) {
         $controller = new CompanyController;
-        $company_id = $controller -> getCompanyId($inputs["company_name"]);
+        $company_id = $controller->getCompanyId($inputs["company_name"]);
 
         $controller = new ProductController;
-        $controller -> productRegister($inputs, $company_id);
+        $controller->productRegister($inputs, $company_id);
         return;
     } 
 
