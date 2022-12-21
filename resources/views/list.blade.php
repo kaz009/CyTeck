@@ -7,11 +7,11 @@
 
 <div>
     <form method="GET" action="{{ route('list') }}">
-        <input type="search" placeholder="商品名を入力" id="search1" value="@if (isset($search1)) {{ $search1 }} @endif">
+        <input type="search" placeholder="商品名を入力" name="search1" value="@if (isset($search1)) {{ $search1 }} @endif">
         <div>
             <div>
                 <div>
-                    <select id="search2" data-toggle="select" value="@if (isset($search2)) {{ $search2 }} @endif">
+                    <select name="search2" data-toggle="select" value="@if (isset($search2)) {{ $search2 }} @endif">
                         <option value="">会社名絞り込み</option>
                         @foreach ($companies as $company)
                             <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
@@ -19,7 +19,12 @@
                     </select>
                 </div>
             </div>
-            <button id="searchBtn" type="button">検索</button>
+            <button type="submit">検索</button>
+            <button>
+                <a href="{{ route('list') }}" class="text-white">
+                    クリア
+                </a>
+            </button>
         </div>
     </form>
 </div>
@@ -35,23 +40,29 @@
                 <th>在庫</th>
                 <th>メーカー</th>
             </tr>
-            <div class="table">
-                <tr>
-                    <td>{{ json_decode($products)}}</td>
-                    <td>
-                        <form action="{{ route('productDetail', ['id'=>$product->products_id]) }}" method="POST">
-                            @csrf
-                            <button type="submit">詳細</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{{ route('productDestroy', ['id'=>$product->products_id]) }}" method="POST">
-                            @csrf
-                            <button id="delBtn" type="submit" onclick='return confirm("削除しますか");' >削除</button>
-                        </form>
-                    </td>
-                </tr>
-            </div>
+
+            @foreach($products as $product)
+            <tr>
+                <td>{{ $product->products_id }}</td>
+                <td>{{ $product->img_path }}</td>
+                <td>{{ $product->product_name }}</td>
+                <td>{{ $product->price }}</td>
+                <td>{{ $product->stock }}</td>
+                <td>{{ $product->company_name }}</td>
+                <td>
+                    <form action="{{ route('productDetail', ['id'=>$product->products_id]) }}" method="POST">
+                        @csrf
+                        <button type="submit">詳細</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ route('productDestroy', ['id'=>$product->products_id]) }}" method="POST">
+                        @csrf
+                        <button id="delBtn" type="submit" onclick='return confirm("削除しますか");' >削除</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
         </thead>
     </table>
     <div>
@@ -60,5 +71,4 @@
         </button>
     </div>
 </div>
-<script src="{{ asset('js/list.js') }}" defer></script>
 @endsection

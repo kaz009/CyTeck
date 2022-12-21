@@ -8,21 +8,19 @@ use App\Http\Controllers\ProductController;
 
 class listController extends Controller
 {
-    public function index(){
-
+    public function index() {
         $controller = new CompanyController;
         $companies = $controller->getCompanyList();
-        
-        $controller = new ProductController;
-        $query = $controller->getProductList();
 
-        $products = $query->get();
-        $json = json($products);
+        $controller = new ProductController;
+        $products = $controller->getProductList()->get();
 
         return view("list")->with([
-            "products"=>$json,
             "companies"=>$companies,
+            "products"=>$products
         ]);
+
+
     }
 
     public function showList(Request $request) {
@@ -35,6 +33,7 @@ class listController extends Controller
 
         $search1 = $request->search1;
         $search2 = $request->search2;
+
 
         //キーワード検索
         if ($search1) {
@@ -57,9 +56,8 @@ class listController extends Controller
 
 
         $products = $query->get();
-        $json = json_encode($products,JSON_PRETTY_PRINT);
 
-        return response($json);
+        return response($products);
     }
 
     public function destroy($id) {

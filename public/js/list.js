@@ -1,3 +1,4 @@
+
 $('#searchBtn').on('click', function () {
 
     $('.table').empty(); //もともとある要素を空にする
