@@ -21,9 +21,12 @@ Auth::routes();
 Route::get("/home", "HomeController@index")->name("home");
 
 //商品一覧
-Route::get("/list", "ListController@showList")->name("list") ->middleware("auth");
+Route::get("/list", "ListController@index")->name("list") ->middleware("auth");
+Route::post("/showList", "ListController@showList")->name("showList");
 Route::post("/destroy{id}", "ListController@destroy")->name("productDestroy");
+Route::get("/destroy{id}", "ListController@destroy");
 Route::post("/detail{id}", "DetailController@targetProduct") -> name("productDetail");
+Route::get("/detail{id}", "DetailController@targetProduct");
 
 //新規登録
 Route::get("/productRegister", "RegisterController@index")->name("productRegister");

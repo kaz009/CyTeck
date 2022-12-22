@@ -47,4 +47,28 @@ class Product extends Model
     public function getProduct($id) {
         return Product :: find($id);
     }
+
+    public function productUpdate($id, $products) {
+        $product = Product :: find($id);
+        $product->update([
+            "product_name" => $products["product_name"],
+            "company_id" => $products["company_id"],
+            "price" => $products["price"],
+            "stock" => $products["stock"],
+            "comment" => $products["comment"],
+            "img_path" => $products["img_path"],
+        ]);
+        return;
+    }
+
+    public function subProduct($id) {
+        $product = Product :: find($id);
+        $stock = $product["stock"] - 1;
+        abort_if($stock<0, 403, '商品がありません。');
+        
+        $product->update([
+            "stock" => $stock
+        ]);
+        return;
+    }
 }
