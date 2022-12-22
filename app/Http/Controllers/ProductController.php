@@ -35,15 +35,7 @@ class ProductController extends Controller
 
     public function productUpdate($id, $products) {
         $model = new Product();
-        $product = $model->getProduct($id);
-        $product->update([
-            "product_name" => $products["product_name"],
-            "company_id" => $products["company_id"],
-            "price" => $products["price"],
-            "stock" => $products["stock"],
-            "comment" => $products["comment"],
-            "img_path" => $products["img_path"],
-        ]);
+        $product = $model->productUpdate($id, $products);
         return;
     }
 }

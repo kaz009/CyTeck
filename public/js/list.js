@@ -1,71 +1,66 @@
 
 $('#searchBtn').on('click', function () {
 
-    $('.table').empty(); //もともとある要素を空にする
-    //$('.search-null').remove(); //検索結果が0のときのテキストを消す
+    $(".table").empty();
 
-    let search1 = $('#search1').val(); //検索ワードを取得
+    let search1 = $('#search1').val();
     let search2 = $('#search2').val();
+    let search3 = Number($('#search3').val());
+    let search4 = Number($('#search4').val());
+    let search5 = Number($('#search5').val());
+    let search6 = Number($('#search6').val());
 
-    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     $.ajax({
-        type: 'GET',
-        url: '/CyTeck/public/showList', //後述するweb.phpのURLと同じ形にする
+        url: '/CyTeck/public/showList', 
         data: {
             'search1': search1,
-            'search2': search2, //ここはサーバーに贈りたい情報。今回は検索ファームのバリューを送りたい。
+            'search2': search2,
+            'search3': search3,
+            'search4': search4,
+            'search5': search5,
+            'search6': search6,
         },
-        dataType: 'json', //json形式で受け取る
-
-        //beforeSend: function () {
-        //    $('.loading').removeClass('display-none');
-        //} //通信中の処理をここで記載。今回はぐるぐるさせるためにcssでスタイルを消す。   
-     }).done(function (data) { //ajaxが成功したときの処理
-        //$('.loading').addClass('display-none'); //通信中のぐるぐるを消す
+        type: 'POST',
+  
+     }).done(function (data) {
         let html = '';
-        $.each(data, function (index, value) { //dataの中身からvalueを取り出す
-　　　　//ここの記述はリファクタ可能
+        $.each(data, function (index, value) {
+
             let products_id = value.products_id;
-            let name = value.img_path;
+            let img_path = value.img_path;
             let product_name = value.product_name;
             let price = value.price;
             let stock = value.stock;
             let company_name = value.company_name;
-        
-　　　　// １ユーザー情報のビューテンプレートを作成
+
             html = `
-                    <tr>
-                        <td>${products_id }</td>
-                        <td>${img_path }</td>
-                        <td>${product_name }</td>
-                        <td>${price }</td>
-                        <td>${stock }</td>
-                        <td>${company_name }</td>
-                        <td>
-                            <form action="{{ route('productDetail', ['id'=>$product->products_id]) }}" method="POST">
-                                @csrf
-                                <button type="submit">詳細</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{{ route('productDestroy', ['id'=>$product->products_id]) }}" method="POST">
-                                @csrf
-                                <button id="delBtn" type="submit" onclick='return confirm("削除しますか");' >削除</button>
-                            </form>
-                        </td>
-                    </tr>
-                    `
+                <tr class="table">
+                    <td>${products_id }</td>
+                    <td>${img_path }</td>
+                    <td>${product_name }</td>
+                    <td>${price }</td>
+                    <td>${stock }</td>
+                    <td>${company_name }</td>
+                    <td>
+                        <button type="submit" onclick="location.href='/CyTeck/public/detail${products_id}'">詳細</button>
+                    </td>
+                    <td>
+                        <button type="submit" onclick='return confirm("削除しますか");'><a href="/CyTeck/public/destroy${products_id}">削除</a></button>
+                    </td>
+                </tr>
+            `
         })
 
-        $('table tbody').append(html); //できあがったテンプレートをビューに追加
-　　　// 検索結果がなかったときの処理
-      //  if (data.length === 0) {
-     //       $('.user-index-wrapper').after('<p class="text-center mt-5 search-null">ユーザーが見つかりません</p>');
-      //  }
+        $('#table').append(html);
 
     }).fail(function (jqXHR, textStatus, errorThrown) {
-        // 通信失敗時の処理
+
         alert('ファイルの取得に失敗しました。');
         console.log("ajax通信に失敗しました");
         console.log("jqXHR          : " + jqXHR.status); // HTTPステータスが取得

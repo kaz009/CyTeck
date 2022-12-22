@@ -47,4 +47,17 @@ class Product extends Model
     public function getProduct($id) {
         return Product :: find($id);
     }
+
+    public function productUpdate($id, $products) {
+        $product = Product :: find($id);
+        $product->update([
+            "product_name" => $products["product_name"],
+            "company_id" => $products["company_id"],
+            "price" => $products["price"],
+            "stock" => $products["stock"],
+            "comment" => $products["comment"],
+            "img_path" => $products["img_path"],
+        ]);
+        return;
+    }
 }

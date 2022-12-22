@@ -25,14 +25,16 @@ class listController extends Controller
 
     public function showList(Request $request) {
 
-        $controller = new CompanyController;
-        $companies = $controller->getCompanyList();
 
         $controller = new ProductController;
         $query = $controller->getProductList();
 
         $search1 = $request->search1;
         $search2 = $request->search2;
+        $search3 = $request->search3;
+        $search4 = $request->search4;
+        $search5 = $request->search5;
+        $search6 = $request->search6;
 
 
         //キーワード検索
@@ -51,7 +53,21 @@ class listController extends Controller
 
         //社名検索
         if ($search2) {
-            $query->where("company_name", "like", $search2);
+            $query->where("company_name", "=", $search2);
+        }
+
+        //価格検索
+        if($search3 > $search4) {
+            $query->where("price", "<", $search3)
+                ->where("price", ">", $search4);
+        }
+
+
+        //在庫検索
+
+        if($search5 > $search6) {
+            $query->where("stock", "<", $search5)
+                ->where("stock", ">", $search6);
         }
 
 
