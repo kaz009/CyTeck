@@ -60,4 +60,15 @@ class Product extends Model
         ]);
         return;
     }
+
+    public function subProduct($id) {
+        $product = Product :: find($id);
+        $stock = $product["stock"] - 1;
+        abort_if($stock<0, 403, '商品がありません。');
+        
+        $product->update([
+            "stock" => $stock
+        ]);
+        return;
+    }
 }

@@ -79,7 +79,8 @@ class listController extends Controller
     public function destroy($id) {
         $controller = new ProductController;
         $controller->destroy($id);
-        return redirect()->route("list");
+        $products = $controller->getProductList()->get();
+        return response($products);
     }
 
     public function productRegister($inputs) {

@@ -35,8 +35,8 @@
 </div>
 
 <div class="links">
-    <table>
-        <thead id="table">
+    <table id="sort">
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>画像</th>
@@ -45,32 +45,31 @@
                 <th>在庫</th>
                 <th>メーカー</th>
             </tr>
-            <div class="table" >
-                @foreach($products as $product)
-                <tr class="table">
-                    <td>{{ $product->products_id }}</td>
-                    <td>{{ $product->img_path }}</td>
-                    <td>{{ $product->product_name }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td>{{ $product->stock }}</td>
-                    <td>{{ $product->company_name }}</td>
-                    <td>
-                        <form action="{{ route('productDetail', ['id'=>$product->products_id]) }}" method="POST">
-                            @csrf
-                            <button type="submit">詳細</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{{ route('productDestroy', ['id'=>$product->products_id]) }}" method="POST">
-                            @csrf
-                            <button type="submit" onclick='return confirm("削除しますか");' >削除</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </div>
         </thead>
+
+        <tbody id="table" class="table">
+            @foreach($products as $product)
+            <tr>
+                <td>{{ $product->products_id }}</td>
+                <td>{{ $product->img_path }}</td>
+                <td>{{ $product->product_name }}</td>
+                <td>{{ $product->price }}</td>
+                <td>{{ $product->stock }}</td>
+                <td>{{ $product->company_name }}</td>
+                <td>
+                    <form action="{{ route('productDetail', ['id'=>$product->products_id]) }}" method="POST">
+                        @csrf
+                        <button type="submit">詳細</button>
+                    </form>
+                </td>
+                <td>
+                <button class="delBtn" id="{{ $product->products_id }}" type="submit" onclick='return confirm("削除しますか");'>削除</button>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
     </table>
+
     <div>
         <button type="submit">
             <a class="rounded-md bg-gray-800 text-white px-4 py-2" href="{{ route('productRegister') }}">新規登録</a>
