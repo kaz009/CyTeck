@@ -12,10 +12,19 @@ class SalesController extends Controller
 {
     public function saleProduct($id) {
         $model = new Product;
-        $model->subProduct($id);
+        $product = $model->getProduct($id);
+        if ($product["stock"]<=0){
+            $result = config('message.error');
 
-        $model = new Sale;
-        $model->addList($id);
+        }else{
+            $model->subProduct($id);
+
+            $model = new Sale;
+            $model->addList($id);
+            $result = "success";
+        }
+
+        return $result;
 
     }
 
